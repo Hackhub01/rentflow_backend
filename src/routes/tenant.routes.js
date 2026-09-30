@@ -1,0 +1,1 @@
+const r=require('express').Router(),c=require('../controllers/tenant.controller'),{protect}=require('../middleware/auth.middleware'),role=require('../middleware/role.middleware');r.use(protect,role('TENANT'));r.get('/dashboard',c.dashboard);r.get('/profile',c.profile);r.patch('/profile',c.updateProfile);module.exports=r;

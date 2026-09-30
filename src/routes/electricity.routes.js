@@ -1,0 +1,1 @@
+const r=require('express').Router(),c=require('../controllers/electricity.controller'),{protect}=require('../middleware/auth.middleware'),role=require('../middleware/role.middleware');r.use(protect);r.get('/',c.list);r.post('/',role('ADMIN'),c.create);r.patch('/:id/approve',role('ADMIN'),c.approve);r.patch('/:id/reject',role('ADMIN'),c.reject);module.exports=r;

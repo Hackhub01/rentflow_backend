@@ -1,0 +1,2 @@
+const jwt=require('jsonwebtoken');const User=require('../models/User');
+exports.protect=async(req,res,next)=>{try{const h=req.headers.authorization;if(!h?.startsWith('Bearer '))return res.status(401).json({success:false,message:'Authentication required'});const d=jwt.verify(h.split(' ')[1],process.env.JWT_SECRET);const u=await User.findById(d.id).select('-password');if(!u||!u.isActive)return res.status(401).json({success:false,message:'User not found or inactive'});req.user=u;next()}catch(e){res.status(401).json({success:false,message:'Invalid or expired token'})}};

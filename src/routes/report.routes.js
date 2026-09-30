@@ -1,0 +1,1 @@
+const r=require('express').Router(),c=require('../controllers/report.controller'),{protect}=require('../middleware/auth.middleware'),role=require('../middleware/role.middleware');r.use(protect,role('ADMIN'));r.get('/monthly',c.monthly);module.exports=r;

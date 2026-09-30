@@ -1,0 +1,1 @@
+const r=require('express').Router(),c=require('../controllers/payment.controller'),{protect}=require('../middleware/auth.middleware'),role=require('../middleware/role.middleware');r.use(protect);r.get('/',c.list);r.post('/',role('ADMIN','TENANT'),c.create);module.exports=r;

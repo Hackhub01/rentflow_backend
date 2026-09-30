@@ -1,0 +1,3 @@
+const User=require('../models/User');const token=require('../utils/generateToken');
+exports.login=async(req,res)=>{const {identifier,password}=req.body;if(!identifier||!password)return res.status(400).json({success:false,message:'Identifier and password are required'});const u=await User.findOne({$or:[{phone:identifier},{username:identifier}]}).select('+password');if(!u||!u.isActive||!(await u.comparePassword(password)))return res.status(401).json({success:false,message:'Invalid credentials'});res.json({success:true,token:token(u),user:{id:u._id,name:u.name,phone:u.phone,username:u.username,role:u.role}})};
+exports.me=async(req,res)=>res.json({success:true,user:req.user});

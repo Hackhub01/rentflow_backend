@@ -1,0 +1,1 @@
+const mongoose=require('mongoose');const schema=new mongoose.Schema({user:{type:mongoose.Schema.Types.ObjectId,ref:'User',unique:true,required:true},aadhaarNumber:String,aadhaarFront:String,aadhaarBack:String,address:String,emergencyContactName:String,emergencyContactPhone:String,occupation:String},{timestamps:true});module.exports=mongoose.model('TenantProfile',schema);
